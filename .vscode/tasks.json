@@ -1,0 +1,46 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "qmake: configure",
+            "type": "shell",
+            "command": "New-Item -ItemType Directory -Force -Path '${workspaceFolder}\\build-vscode-qmake' | Out-Null; Set-Location '${workspaceFolder}\\build-vscode-qmake'; & 'D:\\App\\Qt\\6.11.0\\mingw_64\\bin\\qmake.exe' '..\\BridgeMonitor.pro' -spec win32-g++ CONFIG+=debug CONFIG+=qml_debug",
+            "options": {
+                "cwd": "${workspaceFolder}",
+                "env": {
+                    "Path": "D:\\App\\Qt\\Tools\\mingw1310_64\\bin;D:\\App\\Qt\\6.11.0\\mingw_64\\bin;${env:Path}"
+                }
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "qmake: build",
+            "type": "shell",
+            "command": "& 'D:\\App\\Qt\\Tools\\mingw1310_64\\bin\\mingw32-make.exe' -j4",
+            "options": {
+                "cwd": "${workspaceFolder}\\build-vscode-qmake",
+                "env": {
+                    "Path": "D:\\App\\Qt\\Tools\\mingw1310_64\\bin;D:\\App\\Qt\\6.11.0\\mingw_64\\bin;${env:Path}"
+                }
+            },
+            "dependsOn": "qmake: configure",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": "$gcc"
+        },
+        {
+            "label": "qmake: clean",
+            "type": "shell",
+            "command": "& 'D:\\App\\Qt\\Tools\\mingw1310_64\\bin\\mingw32-make.exe' clean",
+            "options": {
+                "cwd": "${workspaceFolder}\\build-vscode-qmake",
+                "env": {
+                    "Path": "D:\\App\\Qt\\Tools\\mingw1310_64\\bin;D:\\App\\Qt\\6.11.0\\mingw_64\\bin;${env:Path}"
+                }
+            },
+            "problemMatcher": []
+        }
+    ]
+}
